@@ -16,7 +16,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('', function (req, res) {
-	res.location('examples/homepage.html');
+	
 })
 
 var server = app.listen(8081, function () {
