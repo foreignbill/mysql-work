@@ -26,6 +26,8 @@
   <link rel="stylesheet" type="text/css" href="dist/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="dist/components/transition.css">
   <link rel="stylesheet" type="text/css" href="dist/components/table.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/modal.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/dimmer.css">
 
   <style type="text/css">
 
@@ -121,6 +123,8 @@
   <script src="dist/components/visibility.js"></script>
   <script src="dist/components/sidebar.js"></script>
   <script src="dist/components/transition.js"></script>
+  <script src="dist/components/modal.js"></script>
+  <script src="dist/components/dimmer.js"></script>
   <script>
   $(document)
     .ready(function() {
@@ -141,6 +145,9 @@
       // create sidebar and attach to menu open
       $('.ui.sidebar')
         .sidebar('attach events', '.toc.item')
+      ;
+      $('.ui.modal')
+        .modal('show')
       ;
     })
   ;
@@ -202,7 +209,36 @@
 <div class="pusher">
 
   <div class="ui main container">
-    <h1 class="ui header">Parking Lot Information</h1> <!-- Squeeze lower -->
+    <h1 class="ui header">DDD</h1> <!-- Squeeze lower -->
+
+    
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Identification
+      </div>
+      <div class="image content">
+        <div class="ui medium image">
+          <img src="/assets/images/avatar/WARN.jpg">
+        </div>
+        <div class="description">
+          <div class="ui header">Are you VIP?</div>
+          <p>It's important for us to know wheather you are VIP or not because of our way of charging.</p>
+          <p>So, if you are VIP please CLICK <b>YES</b> while <b>NO</b> means not.</p>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui black deny button">
+          No, I'm not.
+        </div>
+        <div class="ui positive right labeled icon button">
+          Yes, I am.
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+
     <h1 class="ui header">Parking Lot Information</h1>
 
     <table class="ui celled padded table">
@@ -247,6 +283,8 @@
     </table>
 
   </div>
+
+
 
 </div>
 
