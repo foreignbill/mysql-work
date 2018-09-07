@@ -25,6 +25,7 @@
   <link rel="stylesheet" type="text/css" href="dist/components/icon.css">
   <link rel="stylesheet" type="text/css" href="dist/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="dist/components/transition.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/table.css">
 
   <style type="text/css">
 
@@ -175,29 +176,78 @@
   <a class="item" href="register.html">Signup</a>
 </div>
 
+<!-- Navi Bar -->
+<div class="ui top fixed menu" id="navbar">
+  <div class="ui container" id="navbar-large">
+    <a class="item" href="/">Home</a>
+    <a class="item active" href="/EnterIn.html">Enter In</a>
+    <a class="item " href="/OutOf.html">Out Of</a>
+    <a class="item " href="/SystemManagement.html">System Management</a>
+    <div class="right menu">
+      <div class="ui category search item massive-search">
+        <div class="ui transparent icon input">
+          <input class="prompt" placeholder="Search animals..." autocomplete="off" type="text">
+          <i class="search link icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+      
+  
+    <div class="item"><a class="ui primary button" href="/login.html?next=/EnterIn.html">Login</a></div>
+    </div>
+  </div>
+</div>
 
 <!-- Page Contents -->
 <div class="pusher">
-  <div class="ui top fixed menu" id="navbar">
-    <div class="ui container" id="navbar-large">
-      <a class="item" href="/">Home</a>
-      <a class="item active" href="/EnterIn.html">Enter In</a>
-      <a class="item " href="/OutOf.html">Out Of</a>
-      <a class="item " href="/SystemManagement.html">System Management</a>
-      <div class="right menu">
-        <div class="ui category search item massive-search">
-          <div class="ui transparent icon input">
-            <input class="prompt" placeholder="Search animals..." autocomplete="off" type="text">
-            <i class="search link icon"></i>
-          </div>
-          <div class="results"></div>
-        </div>
-        
-    
-      <div class="item"><a class="ui primary button" href="/login.html?next=/EnterIn.html">Login</a></div>
-      </div>
-    </div>
+
+  <div class="ui main container">
+    <h1 class="ui header">Parking Lot Information</h1> <!-- Squeeze lower -->
+    <h1 class="ui header">Parking Lot Information</h1>
+
+    <table class="ui celled padded table">
+      <thead>
+        <tr><th class="single line">Region</th>
+        <th>Parking No.</th>
+        <th>Status</th>
+        <th>Operation</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>
+            <h2 class="ui center aligned header">A</h2>
+          </td>
+          <td class="single line center aligned">1</td>
+          <td class="center aligned"><button class="ui negative basic button">Negative</button></td>
+          <td class="center aligned">
+            <div class="ui animated button" tabindex="0">
+              <div class="visible content">Next</div>
+              <div class="hidden content">
+                <i class="right arrow icon"></i>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h2 class="ui center aligned header">A</h2>
+          </td>
+          <td class="single line center aligned">2</td>
+          <td class="center aligned"><button class="ui positive basic button">Available</button></td>
+          <td class="center aligned">
+            <div class="ui animated button" tabindex="0">
+              <div class="visible content">Next</div>
+              <div class="hidden content">
+                <i class="right arrow icon"></i>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
+
 </div>
 
 </body>

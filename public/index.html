@@ -141,6 +141,18 @@
       $('.ui.sidebar')
         .sidebar('attach events', '.toc.item')
       ;
+
+      $.ajax({ 
+        url:"http://127.0.0.1:8081/",
+        type:"POST",
+        dataType:"JSON",  // 处理Ajax跨域问题
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
     })
   ;
   </script>

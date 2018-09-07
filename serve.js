@@ -15,8 +15,21 @@ app.all('*', function(req, res, next) {
     else  next();
 });
 
-app.get('', function (req, res) {
-	
+app.post('/', function (req, res) {
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'root',
+	  database : 'park_manager'
+	});
+	connection.connect();
+	connection.query('SELECT * FROM GARAGE', function (error, results, fields) {
+		if (error) throw error;
+		console.log(results);
+		res.end(JSON.stringify(results));
+	});
+	connection.end();
 })
 
 var server = app.listen(8081, function () {
