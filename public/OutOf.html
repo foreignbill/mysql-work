@@ -25,6 +25,9 @@
   <link rel="stylesheet" type="text/css" href="dist/components/icon.css">
   <link rel="stylesheet" type="text/css" href="dist/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="dist/components/transition.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/modal.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/dimmer.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/input.css">
 
   <style type="text/css">
 
@@ -120,6 +123,8 @@
   <script src="dist/components/visibility.js"></script>
   <script src="dist/components/sidebar.js"></script>
   <script src="dist/components/transition.js"></script>
+  <script src="dist/components/modal.js"></script>
+  <script src="dist/components/dimmer.js"></script>
   <script>
   $(document)
     .ready(function() {
@@ -141,6 +146,8 @@
       $('.ui.sidebar')
         .sidebar('attach events', '.toc.item')
       ;
+      $('.ui.modal')
+        .modal('show');
     })
   ;
   </script>
@@ -196,9 +203,33 @@
 </div>
 
 <!-- Page Contents -->
-<div class="pusher">
-  
-</div>
+  <div class="pusher">
+
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Identification
+      </div>
+      <div class="image content">
+        <div class="ui medium image">
+          <img src="/assets/images/avatar/WARN.jpg">
+        </div>
+        <div class="description">
+          <div class="ui header">Tell us your Lcense Plate Number:</div>
+          <div class="ui input focus">
+            <input placeholder="For example, '苏A22222'" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui positive right labeled icon button">
+          Submit
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </body>
 </html>

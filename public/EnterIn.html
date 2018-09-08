@@ -28,6 +28,7 @@
   <link rel="stylesheet" type="text/css" href="dist/components/table.css">
   <link rel="stylesheet" type="text/css" href="dist/components/modal.css">
   <link rel="stylesheet" type="text/css" href="dist/components/dimmer.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/input.css">
 
   <style type="text/css">
 
@@ -149,6 +150,22 @@
       $('.ui.modal')
         .modal('show')
       ;
+
+      $('#Submit-Icon').click(function() {
+        $.ajax({ 
+          url:"http://127.0.0.1:8081/check_car_plate?car_plate="+$("#car_plate-input").val(),
+          type:"POST",
+          dataType:"JSON",  // 处理Ajax跨域问题
+          success: function(data) {
+            console.log(data);
+            var str = data[0].endtime;
+            console.log(str);
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
     })
   ;
   </script>
@@ -222,17 +239,15 @@
           <img src="/assets/images/avatar/WARN.jpg">
         </div>
         <div class="description">
-          <div class="ui header">Are you VIP?</div>
-          <p>It's important for us to know wheather you are VIP or not because of our way of charging.</p>
-          <p>So, if you are VIP please CLICK <b>YES</b> while <b>NO</b> means not.</p>
+          <div class="ui header">Tell us your Lcense Plate Number:</div>
+          <div class="ui input focus">
+            <input placeholder="For example, '苏A22222'" type="text" id="car_plate-input">
+          </div>
         </div>
       </div>
       <div class="actions">
-        <div class="ui black deny button">
-          No, I'm not.
-        </div>
-        <div class="ui positive right labeled icon button">
-          Yes, I am.
+        <div class="ui positive right labeled icon button" id="Submit-Icon">
+          Submit
           <i class="checkmark icon"></i>
         </div>
       </div>

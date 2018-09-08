@@ -32,6 +32,24 @@ app.post('/', function (req, res) {
 	connection.end();
 })
 
+app.post('/check_car_plate', function (req, res) {
+	var car_plate = req.query.car_plate;
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'root',
+	  database : 'park_manager'
+	});
+	connection.connect();
+	connection.query('SELECT * FROM VIP WHERE car_plate="'+car_plate+'"', function (error, results, fields) {
+		if (error) throw error;
+		console.log(results);
+		res.end(JSON.stringify(results));
+	});
+	connection.end();
+})
+
 var server = app.listen(8081, function () {
 	var host = server.address().address;
 	var port = server.address().port;
