@@ -25,6 +25,7 @@
   <link rel="stylesheet" type="text/css" href="dist/components/icon.css">
   <link rel="stylesheet" type="text/css" href="dist/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="dist/components/transition.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/input.css">
 
   <style type="text/css">
 
@@ -120,10 +121,14 @@
   <script src="dist/components/visibility.js"></script>
   <script src="dist/components/sidebar.js"></script>
   <script src="dist/components/transition.js"></script>
+  <script src="jquery.cookie.js"></script>
   <script>
+  $.cookie('the_user', 'root', { expires: 7 });
+  if($.cookie('the_user') == 'null' || $.cookie('the_user') == undefined) {
+    alert("Please Login!!!");
+  }
   $(document)
     .ready(function() {
-
       // fix menu when passed
       $('.masthead')
         .visibility({

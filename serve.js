@@ -32,7 +32,7 @@ app.post('/', function (req, res) {
 	connection.end();
 })
 
-app.post('/check_car_plate', function (req, res) {
+app.post('/check_car_plate', urlencodedParser, function (req, res) {
 	var car_plate = req.query.car_plate;
 	var mysql      = require('mysql');
 	var connection = mysql.createConnection({
@@ -42,7 +42,25 @@ app.post('/check_car_plate', function (req, res) {
 	  database : 'park_manager'
 	});
 	connection.connect();
-	connection.query('SELECT * FROM VIP WHERE car_plate="'+car_plate+'"', function (error, results, fields) {
+	connection.query('SELECT * FROM VIP,PARKING_SPACE WHERE VIP.pno=PARKING_SPACE.pno AND car_plate="'+car_plate+'"', function (error, results, fields) {
+		if (error) throw error;
+		console.log(results);
+		res.end(JSON.stringify(results));
+	});
+	connection.end();
+})
+
+app.post('/check_parking_space', urlencodedParser, function (req, res) {
+	var car_plate = req.query.car_plate;
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'root',
+	  database : 'park_manager'
+	});
+	connection.connect();
+	connection.query('SELECT * FROM PARKING_SPACE', function (error, results, fields) {
 		if (error) throw error;
 		console.log(results);
 		res.end(JSON.stringify(results));
