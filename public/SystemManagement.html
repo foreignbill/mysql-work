@@ -26,6 +26,10 @@
   <link rel="stylesheet" type="text/css" href="dist/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="dist/components/transition.css">
   <link rel="stylesheet" type="text/css" href="dist/components/input.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/accordion.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/table.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
 
   <style type="text/css">
 
@@ -122,6 +126,10 @@
   <script src="dist/components/sidebar.js"></script>
   <script src="dist/components/transition.js"></script>
   <script src="jquery.cookie.js"></script>
+  <script src="dist/components/accordion.js"></script>
+  <script src="dist/components/table.js"></script>
+  <script src="dist/components/divider.js"></script>
+  <script src="dist/semantic.min.js"></script>
   <script>
   $.cookie('the_user', 'root', { expires: 7 });
   if($.cookie('the_user') == 'null' || $.cookie('the_user') == undefined) {
@@ -145,6 +153,10 @@
       // create sidebar and attach to menu open
       $('.ui.sidebar')
         .sidebar('attach events', '.toc.item')
+      ;
+
+      $('.ui.accordion')
+        .accordion()
       ;
     })
   ;
@@ -204,7 +216,135 @@
 
 <!-- Page Contents -->
 <div class="pusher">
-  
+  <h1>ddd</h1>
+
+  <h1> </h1>
+
+  <div class="ui styled accordion" style="width: 80%">
+    <div class="title"><i class="dropdown icon"></i> Orders </div>
+    <div class="content">
+
+      <table class="ui single line table">
+        <thead>
+          <tr>
+            <th>Order Number</th>
+            <th>Car License Number</th>
+            <th>Begin Time</th>
+            <th>End Time</th>
+            <th>Cost</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20180910193515A22222</td>
+            <td>苏A22222</td>
+            <td>2018-9-10 21:35</td>
+            <td>2018-9-10 23:35</td>
+            <td>100 元</td>
+            <td>Normal Usage</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="title"><i class="dropdown icon"></i> VIP Services </div>
+    <div class="content">
+
+      <table class="ui single line table">
+        <thead>
+          <tr>
+            <th>Car License Number</th>
+            <th>VIP Parking Number</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>苏A22222</td>
+            <td>A区1号</td>
+            <td>2018-9-10 23:35</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>Add VIP</h1>
+
+      <div class="ui two column middle aligned very relaxed stackable grid">
+        <div class="column">
+          <div class="ui form">
+            <div class="field">
+              <label>Car License Number</label>
+              <div class="ui left icon input">
+                <input placeholder="Username" type="text">
+                <i class="car icon"></i>
+              </div>
+            </div>
+            <div class="field">
+              <label>Service duration( month )</label>
+              <div class="ui left icon input">
+                <input type="number">
+                <i class="add to calendar icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="center aligned column">
+          <div class="ui big green labeled icon button"><i class="signup icon"></i> Submit </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="title"><i class="dropdown icon"></i> Fees Manage </div>
+    <div class="content">
+
+      <table class="ui single line table">
+        <thead>
+          <tr>
+            <th>Service Type</th>
+            <th>Cost</th>
+            <th>Change To (Yuan)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>VIP</td>
+            <td>1200 Yuan / Month</td>
+            <td>
+              <div class="ui left icon input">
+                <input type="number">
+                <i class="money icon"></i>
+              </div>
+            </td>
+            <td>
+              <div class="item">
+                <button class="ui button">Submit</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Normal</td>
+            <td>20 Yuan / Hour</td>
+            <td>
+              <div class="ui left icon input">
+                <input type="number">
+                <i class="money icon"></i>
+              </div>
+            </td>
+            <td>
+              <div class="item">
+                <button class="ui button">Submit</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
 </div>
 
 </body>
