@@ -126,6 +126,7 @@
   <script src="dist/components/transition.js"></script>
   <script src="dist/components/modal.js"></script>
   <script src="dist/components/dimmer.js"></script>
+  <script src="jquery.cookie.js"></script>
   <script src="function.js"></script>
   <script>
   $(document)
@@ -160,7 +161,6 @@
           dataType:"JSON",  // 处理Ajax跨域问题
           success: function(data) {
             if(data.length > 0) {
-              console.log("e");
               $('#show-bar').append(
                     '<tr>'
                       +'<td>'
@@ -169,15 +169,20 @@
                       +'<td class="single line center aligned">'+data[0].pno+'</td>'
                       +'<td class="center aligned"><button class="ui positive basic button">Available</button></td>'
                       +'<td class="center aligned">'
-                        +'<div class="ui animated button" tabindex="0">'
+                        +'<div class="ui button" tabindex="0" data-pno='+data[0].pno+'>'
                           +'<div class="visible content">Next</div>'
-                          +'<div class="hidden content">'
-                            +'<i class="right arrow icon"></i>'
-                          +'</div>'
                         +'</div>'
                       +'</td>'
                     +'</tr>'
                 );
+                $('.ui.button').each(function(){
+                  $(this).click(function(){
+                    console.log($("#car_plate-input").val() + " , " + $(this).attr('data-pno'));
+                    // $.ajax({
+                    //   url:"http://127.0.0.1:8081/"
+                    // });
+                  });
+                });
             } else {
               $.ajax({ 
                 url:"http://127.0.0.1:8081/check_parking_space",
@@ -199,16 +204,22 @@
                           +'<td class="single line center aligned">'+data[i].pno+'</td>'
                           +'<td class="center aligned"><button class="ui ' + str + ' basic button">' + str2 + '</button></td>'
                           +'<td class="center aligned">'
-                            +'<div class="ui animated button" tabindex="0">'
+                            +'<div class="ui button" tabindex="0" data-pno='+data[i].pno+'>'
                               +'<div class="visible content">Next</div>'
-                              +'<div class="hidden content">'
-                                +'<i class="right arrow icon"></i>'
-                              +'</div>'
                             +'</div>'
                           +'</td>'
                         +'</tr>'
                     );
                   }
+                  $('.ui.button').each(function(){
+                    $(this).click(function(){
+                      console.log($("#car_plate-input").val() + " , " + $(this).attr('data-pno'));
+                      // $.ajax({
+                      //   url:"http://127.0.0.1:8081/",
+                      //   type="POST",
+                      // });
+                    });
+                  });
                 },
                 error: function(error) {
                   console.log(error);
