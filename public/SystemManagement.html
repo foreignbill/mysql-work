@@ -130,6 +130,7 @@
   <script src="dist/components/table.js"></script>
   <script src="dist/components/divider.js"></script>
   <script src="dist/semantic.min.js"></script>
+  <script src="function.js"></script>
   <script>
   $.cookie('the_user', 'root', { expires: 7 });
   if($.cookie('the_user') == 'null' || $.cookie('the_user') == undefined) {
@@ -158,6 +159,128 @@
       $('.ui.accordion')
         .accordion()
       ;
+
+      $.ajax({
+        url:"http://127.0.0.1:8081/list_order",
+        type:"POST",
+        dataType:"JSON",
+        success: function(data) {
+          for(var i=0;i<data.length;i++){
+            var endtime = data[i].endtime;
+            if(endtime == null) endtime = "null";
+            else endtime = Date_toString(data[i].endtime);
+            $("#form1").append(
+              '<tr>'
+                +'<td>'+data[i].order_no+'</td>'
+                +'<td>'+data[i].car_plate+'</td>'
+                +'<td>'+data[i].pno+'</td>'
+                +'<td>'+Date_toString(data[i].begtime)+'</td>'
+                +'<td>'+endtime+'</td>'
+                +'<td>'+data[i].cost+' 元</td>'
+              +'</tr>'
+              );
+          }
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+
+      $.ajax({
+        url:"http://127.0.0.1:8081/list_VIP",
+        type:"POST",
+        dataType:"JSON",
+        success: function(data) {
+          for(var i=0;i<data.length;i++)
+            $("#form2").append(
+              '<tr>'
+                +'<td>'+data[i].car_plate+'</td>'
+                +'<td>'+data[i].pno+'</td>'
+                +'<td>'+Date_toString(data[i].endtime)+'</td>'
+              +'</tr>'
+              );
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+
+      $.ajax({
+        url:"http://127.0.0.1:8081/list_PRICE",
+        type:"POST",
+        dataType:"JSON",
+        success: function(data) {
+          if(data[0].type == "NIP") {
+            $("#VIP_PRICE").append(data[1].price + ' Yuan / Month');
+            $("#NORMAL_PRICE").append(data[0].price + ' Yuan / Hour');
+          } else {
+            $("#VIP_PRICE").append(data[0].price + ' Yuan / Month');
+            $("#NORMAL_PRICE").append(data[1].price + ' Yuan / Hour');
+          }
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+
+      $('#submit-icon').click(function(){
+        var car_plate = $('#car_plate_input').val();
+        var months = $('#add_how_many_months').val();
+        $.ajax({
+          url:"http://127.0.0.1:8081/search_VIP?car_plate="+car_plate,
+          type:"POST",
+          dataType:"JSON",
+          success: function(data) {
+            if(data.length > 0) {
+              console.log("YES");
+              $.ajax({
+                url:"http://127.0.0.1:8081/update_VIP?car_plate="+car_plate+"&endtime="+months,
+                type:"POST",
+                dataType:"JSON",
+                success: function(data) {
+
+                },
+                error: function(error) {
+
+                }
+              });
+            } else {
+              console.log("NO");
+              $.ajax({
+                url:"http://127.0.0.1:8081/new_VIP",
+                type:"POST",
+                dataType:"JSON",
+                success: function(data) {
+                  console.log(data);
+                  alert("You Parking Lot Number is: " + data[0].pno);
+                  if(data.length > 0) {
+                    $.ajax({
+                      url:"http://127.0.0.1:8081/create_VIP?car_plate="+car_plate+"&pno="+data[0].pno+"&endtime="+months,
+                      type:"POST",
+                      dataType:"JSON",
+                      success: function(data) {
+
+                      },
+                      error: function(error) {
+                        console.log(error);
+                      }
+                    });
+                  } else {
+                    alert("NO VIP NOW!");
+                  }
+                },
+                error: function(error) {
+                  console.log(error);
+                }
+              });
+            }
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+
     })
   ;
   </script>
@@ -229,21 +352,13 @@
           <tr>
             <th>Order Number</th>
             <th>Car License Number</th>
+            <th>PNO</th>
             <th>Begin Time</th>
             <th>End Time</th>
             <th>Cost</th>
-            <th>Comment</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>20180910193515A22222</td>
-            <td>苏A22222</td>
-            <td>2018-9-10 21:35</td>
-            <td>2018-9-10 23:35</td>
-            <td>100 元</td>
-            <td>Normal Usage</td>
-          </tr>
+        <tbody id="form1">
         </tbody>
       </table>
 
@@ -259,12 +374,8 @@
             <th>End Time</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>苏A22222</td>
-            <td>A区1号</td>
-            <td>2018-9-10 23:35</td>
-          </tr>
+        <tbody id="form2">
+          
         </tbody>
       </table>
 
@@ -276,21 +387,21 @@
             <div class="field">
               <label>Car License Number</label>
               <div class="ui left icon input">
-                <input placeholder="Username" type="text">
+                <input placeholder="Car License Number" type="text" id="car_plate_input">
                 <i class="car icon"></i>
               </div>
             </div>
             <div class="field">
-              <label>Service duration( month )</label>
+              <label>Service Till( Date )</label>
               <div class="ui left icon input">
-                <input type="number">
+                <input type="date" id="add_how_many_months">
                 <i class="add to calendar icon"></i>
               </div>
             </div>
           </div>
         </div>
         <div class="center aligned column">
-          <div class="ui big green labeled icon button"><i class="signup icon"></i> Submit </div>
+          <div class="ui big green labeled icon button" id="submit-icon"><i class="signup icon"></i> Submit </div>
         </div>
       </div>
 
@@ -310,7 +421,7 @@
         <tbody>
           <tr>
             <td>VIP</td>
-            <td>1200 Yuan / Month</td>
+            <td id="VIP_PRICE"></td>
             <td>
               <div class="ui left icon input">
                 <input type="number">
@@ -326,7 +437,7 @@
 
           <tr>
             <td>Normal</td>
-            <td>20 Yuan / Hour</td>
+            <td id="NORMAL_PRICE"></td>
             <td>
               <div class="ui left icon input">
                 <input type="number">

@@ -161,28 +161,50 @@
           dataType:"JSON",  // 处理Ajax跨域问题
           success: function(data) {
             if(data.length > 0) {
+              var str = "positive";
+              var str2 = "Available";
+              if(data[0].isempty == 0) {
+                str = "negative";
+                str2 = "Negative";
+              }
               $('#show-bar').append(
                     '<tr>'
                       +'<td>'
                         +'<h2 class="ui center aligned header">'+data[0].zone+'</h2>'
                       +'</td>'
                       +'<td class="single line center aligned">'+data[0].pno+'</td>'
-                      +'<td class="center aligned"><button class="ui positive basic button">Available</button></td>'
+                      +'<td class="center aligned"><button class="ui '+str+' basic button">'+str2+'</button></td>'
                       +'<td class="center aligned">'
-                        +'<div class="ui button" tabindex="0" data-pno='+data[0].pno+'>'
+                        +'<div class="ui button" tabindex="0" data-pno='+data[0].pno+' isempty='+str+'>'
                           +'<div class="visible content">Next</div>'
                         +'</div>'
                       +'</td>'
                     +'</tr>'
                 );
                 $('.ui.button').each(function(){
-                  $(this).click(function(){
-                    console.log($("#car_plate-input").val() + " , " + $(this).attr('data-pno'));
-                    // $.ajax({
-                    //   url:"http://127.0.0.1:8081/"
-                    // });
+                    $(this).click(function(){
+                      console.log($("#car_plate-input").val() + " , " + $(this).attr('data-pno'));
+                      if($(this).attr('isempty') == 'negative') return;
+                      $.cookie('pno',$(this).attr('data-pno'),{expires: 7})
+                      $.ajax({
+                        url:"http://127.0.0.1:8081/insert_into_parking_detail?car_plate="+$("#car_plate-input").val()+"&pno="+$(this).attr('data-pno'),
+                        type:"POST",
+                        dataType:"JSON",
+                        success: function(data) {
+                          if(data == "no") {
+                            console.log('no');
+                            window.location.href="EnterIn-fail.html";
+                          } else {
+                            console.log('yes');
+                            window.location.href="EnterIn-success.html";
+                          }
+                        },
+                        error: function(error) {
+                          console.log('no');
+                        }
+                      });
+                    });
                   });
-                });
             } else {
               $.ajax({ 
                 url:"http://127.0.0.1:8081/check_parking_space",
@@ -204,7 +226,7 @@
                           +'<td class="single line center aligned">'+data[i].pno+'</td>'
                           +'<td class="center aligned"><button class="ui ' + str + ' basic button">' + str2 + '</button></td>'
                           +'<td class="center aligned">'
-                            +'<div class="ui button" tabindex="0" data-pno='+data[i].pno+'>'
+                            +'<div class="ui button" tabindex="0" data-pno='+data[i].pno+' isempty='+str+'>'
                               +'<div class="visible content">Next</div>'
                             +'</div>'
                           +'</td>'
@@ -214,10 +236,25 @@
                   $('.ui.button').each(function(){
                     $(this).click(function(){
                       console.log($("#car_plate-input").val() + " , " + $(this).attr('data-pno'));
-                      // $.ajax({
-                      //   url:"http://127.0.0.1:8081/",
-                      //   type="POST",
-                      // });
+                      if($(this).attr('isempty') == 'negative') return;
+                      $.cookie('pno',$(this).attr('data-pno'),{expires: 7})
+                      $.ajax({
+                        url:"http://127.0.0.1:8081/insert_into_parking_detail?car_plate="+$("#car_plate-input").val()+"&pno="+$(this).attr('data-pno'),
+                        type:"POST",
+                        dataType:"JSON",
+                        success: function(data) {
+                          if(data == "no") {
+                            console.log('no');
+                            window.location.href="EnterIn-fail.html";
+                          } else {
+                            console.log('yes');
+                            window.location.href="EnterIn-success.html";
+                          }
+                        },
+                        error: function(error) {
+                          console.log('no');
+                        }
+                      });
                     });
                   });
                 },
@@ -335,6 +372,10 @@
         <th>Operation</th>
       </tr></thead>
       <tbody id="show-bar">
+        <!-- show what -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
       </tbody>
     </table>
 
