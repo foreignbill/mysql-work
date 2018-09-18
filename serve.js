@@ -311,6 +311,42 @@ app.post('/create_VIP', urlencodedParser, function (req, res) {
 	connection.end();
 })
 
+app.post('/change_vip_price', urlencodedParser, function (req, res) {
+	var price = req.query.price;
+	console.log(price);
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'root',
+	  database : 'park_manager'
+	});
+	connection.connect();
+	connection.query('update price set price="'+price+'" where type="VIP"', function (error, results, fields) {
+		if (error) throw error;
+		res.end(JSON.stringify(results));
+	});
+	connection.end();
+})
+
+app.post('/change_normal_price', urlencodedParser, function (req, res) {
+	var price = req.query.price;
+	console.log(price);
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'root',
+	  database : 'park_manager'
+	});
+	connection.connect();
+	connection.query('update price set price="'+price+'" where type="NIP"', function (error, results, fields) {
+		if (error) throw error;
+		res.end(JSON.stringify(results));
+	});
+	connection.end();
+})
+
 var server = app.listen(8081, function () {
 	var host = server.address().address;
 	var port = server.address().port;

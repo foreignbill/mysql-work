@@ -132,13 +132,16 @@
   <script src="dist/semantic.min.js"></script>
   <script src="function.js"></script>
   <script>
-  $.cookie('the_user', 'root', { expires: 7 });
   if($.cookie('the_user') == 'null' || $.cookie('the_user') == undefined) {
     alert("Please Login!!!");
+    window.location.href="login.html";
   }
   $(document)
     .ready(function() {
       // fix menu when passed
+
+      $("#all-info").append("Welcome, " + $.cookie('the_user') + ".");
+
       $('.masthead')
         .visibility({
           once: false,
@@ -281,6 +284,43 @@
         });
       });
 
+      $("#VIP_PRICE_SUBMIT").click(function() {
+        console.log($("#VIP_PRICE_INPUT").val());
+        if($("#VIP_PRICE_INPUT").val().length < 1) return;
+        $.ajax({
+          url:"http://127.0.0.1:8081/change_vip_price?price="+$("#VIP_PRICE_INPUT").val(),
+          type:"POST",
+          dataType:"JSON",
+          success: function(data) {
+            window.location.href="SystemManagement.html";
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+
+      $("#NORMAL_PRICE_SUBMIT").click(function() {
+        console.log($("#NORMAL_PRICE_INPUT").val());
+        if($("#NORMAL_PRICE_INPUT").val().length < 1) return;
+        $.ajax({
+          url:"http://127.0.0.1:8081/change_normal_price?price="+$("#NORMAL_PRICE_INPUT").val(),
+          type:"POST",
+          dataType:"JSON",
+          success: function(data) {
+            window.location.href="SystemManagement.html";
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+
+      $("#Logout").click(function(){
+        $.cookie('the_user', null);
+        window.location.href="SystemManagement.html";
+      });
+
     })
   ;
   </script>
@@ -334,6 +374,9 @@
   
     <div class="item"><a class="ui primary button" href="/login.html?next=/SystemManagement.html">Login</a></div>
     </div>
+
+    <div class="item"><a class="ui primary button" href="" id="Logout">Logout</a></div>
+    </div>
   </div>
 </div>
 
@@ -342,6 +385,13 @@
   <h1>ddd</h1>
 
   <h1> </h1>
+
+  <div class="ui list">
+    <div class="item">
+      <i class="users icon"></i>
+      <div class="content" id="all-info"></div>
+    </div>
+  </div>
 
   <div class="ui styled accordion" style="width: 80%">
     <div class="title"><i class="dropdown icon"></i> Orders </div>
@@ -424,12 +474,12 @@
             <td id="VIP_PRICE"></td>
             <td>
               <div class="ui left icon input">
-                <input type="number">
+                <input type="number" id="VIP_PRICE_INPUT">
                 <i class="money icon"></i>
               </div>
             </td>
             <td>
-              <div class="item">
+              <div class="item" id="VIP_PRICE_SUBMIT">
                 <button class="ui button">Submit</button>
               </div>
             </td>
@@ -440,12 +490,12 @@
             <td id="NORMAL_PRICE"></td>
             <td>
               <div class="ui left icon input">
-                <input type="number">
+                <input type="number" id="NORMAL_PRICE_INPUT">
                 <i class="money icon"></i>
               </div>
             </td>
             <td>
-              <div class="item">
+              <div class="item" id="NORMAL_PRICE_SUBMIT">
                 <button class="ui button">Submit</button>
               </div>
             </td>

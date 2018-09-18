@@ -29,7 +29,7 @@
   <script src="assets/library/jquery.min.js"></script>
   <script src="../dist/components/form.js"></script>
   <script src="../dist/components/transition.js"></script>
-
+  <script src="jquery.cookie.js"></script>
   <style type="text/css">
     body {
       background-color: #DADADA;
@@ -45,42 +45,20 @@
     }
   </style>
   <script>
-  $(document)
-    .ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            email: {
-              identifier  : 'email',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your e-mail'
-                },
-                {
-                  type   : 'email',
-                  prompt : 'Please enter a valid e-mail'
-                }
-              ]
-            },
-            password: {
-              identifier  : 'password',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[6]',
-                  prompt : 'Your password must be at least 6 characters'
-                }
-              ]
-            }
-          }
-        })
-      ;
-    })
-  ;
+  $(document).ready(function() {
+    $("#login").click(function(){
+      var user_name = $("#user_name").val();
+      var pwd = $("#pwd").val();
+      if(user_name.length < 1) return;
+      if(pwd.length < 1) return;
+      if(user_name == 'root' && pwd == 'root') {
+        window.location.href="SystemManagement.html";
+        $.cookie('the_user','root');
+      } else {
+        alert("wrong");
+      }
+    });
+  });
   </script>
 </head>
 <body>
@@ -98,16 +76,16 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
+            <input type="text" name="email" placeholder="E-mail address" id="user_name">
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" id="pwd">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Login</div>
+        <div class="ui fluid large teal submit button" id="login">Login</div>
       </div>
 
       <div class="ui error message"></div>
