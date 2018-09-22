@@ -170,7 +170,7 @@
                       +'<td class="single line center aligned">'+data[0].pno+'</td>'
                       +'<td id="Intime">'+Date_toString(data[0].begtime)+'</td>'
                       +'<td id="Nowtime"></td>'//实时获取gettime()
-                      +'<td id="money">'+'9$/h'+'</td>'
+                      +'<td id="money">'+getprice($("#car_plate-input").val())+'</td>'
                       +'<td class="center aligned">'
                         +'<div class="ui animated button" tabindex="0" id="pay">'
                           +'<div class="visible content">pay</div>'
@@ -181,6 +181,26 @@
                       +'</td>'
                     +'</tr>'
                 );
+              function getprice(car_plate) {
+                $.ajax({
+                  url:"http://127.0.0.1:8081/get_price?car_plate="+car_plate,
+                  type:"POST",
+                  dataType:"JSON",
+                  success: function(data) {
+                    console.log(data);
+                    var str;
+                    if(data.length > 0) {
+                      str = "$" + data[0].price
+                    } else {
+                      str = "$0";
+                    }
+                    $("#money").html(str);
+                  },
+                  error: function(error) {
+                    console.log(error);
+                  }
+                });
+              }
             } else {
             }
             gettime(); //实时获取

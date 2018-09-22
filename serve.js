@@ -347,6 +347,23 @@ app.post('/change_normal_price', urlencodedParser, function (req, res) {
 	connection.end();
 })
 
+app.post('/get_price', urlencodedParser, function (req, res) {
+	var car_plate = req.query.car_plate;
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'root',
+	  database : 'park_manager'
+	});
+	connection.connect();
+	connection.query('select * from PRICE where type="NIP" and "'+car_plate+'" not in(select car_plate from VIP);', function (error, results, fields) {
+		if (error) throw error;
+		res.end(JSON.stringify(results));
+	});
+	connection.end();
+})
+
 var server = app.listen(8081, function () {
 	var host = server.address().address;
 	var port = server.address().port;
