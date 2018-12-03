@@ -20,7 +20,7 @@ app.post('/', function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -38,7 +38,7 @@ app.post('/check_car_plate', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -56,7 +56,7 @@ app.post('/check_parking_space', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -74,7 +74,7 @@ app.post('/check_car_plate_on_ordertable', urlencodedParser, function (req, res)
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -94,7 +94,7 @@ app.post('/insert_into_parking_detail', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -150,7 +150,7 @@ app.post('/end_order', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	var d=new Date(); //创建一个Date对象 time时间 offset 时区  中国为  8
@@ -190,7 +190,7 @@ app.post('/list_order', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -207,7 +207,7 @@ app.post('/list_VIP', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -224,7 +224,7 @@ app.post('/list_PRICE', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -242,7 +242,7 @@ app.post('/search_VIP', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -261,7 +261,7 @@ app.post('/update_VIP', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -280,7 +280,7 @@ app.post('/new_VIP', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -299,7 +299,7 @@ app.post('/create_VIP', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -318,7 +318,7 @@ app.post('/change_vip_price', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -336,7 +336,7 @@ app.post('/change_normal_price', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
@@ -353,7 +353,7 @@ app.post('/get_price', urlencodedParser, function (req, res) {
 	var connection = mysql.createConnection({
 	  host     : 'localhost',
 	  user     : 'root',
-	  password : 'root',
+	  password : 'root1234',
 	  database : 'park_manager'
 	});
 	connection.connect();
